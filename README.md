@@ -61,4 +61,32 @@ docker pull nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04
 docker run --rm --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04 nvidia-smi
 ```
 
+**准备临时容器**
+
+接下来先运行起来一个临时容器在其中安装 PyTorch 环境。
+
+```bash
+# 启动一个不会退出的 daemon 容器
+docker run --name cuda-devel --restart always --gpus all -dt nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04
+# 登入到容器 shell
+docker exec -it cuda-devel /bin/bash
+```
+
+在容器中安装运行时依赖，官方文档说是 DeepSeek R1 参考 DeepSeek V3 的步骤，先试着来不过步骤和官网有一定差异。
+
+```bash
+# 通过包管理安装一些依赖
+apt install -y git python3-full python3-pip
+
+# 准备 venv 环境
+mkdir -p /opt/DeepSeek-R1-Playground
+python3 -m venv /opt/DeepSeek-R1-Playground/.venv
+
+# 将 DeepSeek-V3 仓库克隆到 /opt 下
+git -C /opt clone https://github.com/deepseek-ai/DeepSeek-V3.git
+
+# 安装 DeepSeek-V3 的依赖
+/opt/DeepSeek-R1-Playground/.venv/bin/pip3 install -r /opt/DeepSeek-V3/inference/requirements.txt
+```
+
 未完待续
