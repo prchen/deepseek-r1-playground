@@ -89,4 +89,19 @@ git -C /opt clone https://github.com/deepseek-ai/DeepSeek-V3.git
 /opt/DeepSeek-R1-Playground/.venv/bin/pip3 install -r /opt/DeepSeek-V3/inference/requirements.txt
 ```
 
+**下载模型文件**
+
+由于模型非常非常大在容器内下载的话后续不方便重复使用，需要退出容器环境回到 wsl 中进行下载。
+
+```bash
+# 安装 git lfs
+sudo apt install git-lfs
+git lfs install
+
+# 克隆这里需要先添加 ssh 公钥到自己的 hugging face 账户下并克隆到一个记得住的位置，回头整理笔记时再加文档，然后文件发现下不下来得分头行动也后面再补充文档吧
+GIT_LFS_SKIP_SMUDGE=1 git clone git@hf.co:deepseek-ai/DeepSeek-V3
+```
+
+然后去 Hugging Face 手动把模型的数据文件下下来，有 163 个 4G 左右的切片，得下好久：[模型仓库](https://huggingface.co/deepseek-ai/DeepSeek-R1/tree/main)
+
 未完待续
