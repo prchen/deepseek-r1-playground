@@ -150,7 +150,7 @@ python3 -m venv /opt/DeepSeek-R1-Playground/.venv
 /opt/DeepSeek-R1-Playground/.venv/bin/pip3 install "sglang[all]" --find-links https://flashinfer.ai/whl/cu124/torch2.4/flashinfer/
 ```
 
-### 模神启动！
+### 原模启动！
 
 最后只需要将模型添加到容器内并启动 SGLang 服务，临时实验环境的搭建就大功告成了，将下载好的模型添加到容器（以下命令需要在 WSL 环境内执行）：
 
